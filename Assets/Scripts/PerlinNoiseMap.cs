@@ -14,6 +14,21 @@ public class PerlinNoiseMap : MonoBehaviour
     private float maxSample;
 
     private Material standardMaterial;
+    private GameObject currentMap;
+
+    public void Generate()
+    {
+        if(this.currentMap != null)
+        {
+            Destroy(this.currentMap);
+        }
+        this.currentMap = MapGenerator.Generate(
+            this.gridCount,
+            this.magnitude,
+            this.maxSample,
+            this.standardMaterial
+        );
+    }
 
     void Awake()
     {
@@ -22,11 +37,6 @@ public class PerlinNoiseMap : MonoBehaviour
 
     void Start()
     {
-        MapGenerator.Generate(
-            this.gridCount,
-            this.magnitude,
-            this.maxSample,
-            this.standardMaterial
-        );
+        this.Generate();
     }
 }
